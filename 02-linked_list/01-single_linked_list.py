@@ -2,6 +2,7 @@
 使用带 head 头的单向链表实现 – 水浒英雄排行榜管理完成对英雄人物的增删改查操作
 
 """
+from collections import deque
 
 
 class HeroNode:
@@ -90,6 +91,19 @@ class SingleLinkedList:
         for i in range(self.length() + 1 - k):
             temp = temp.next
         return temp
+
+    def reverse_list_by_stack(self):
+        """
+        利用栈，倒序输出
+        :return:
+        """
+        temp: HeroNode = self.head
+        stack = deque()
+        while temp.next:
+            stack.append(temp.next)
+            temp = temp.next
+        while len(stack) > 0:
+            print(stack.pop())
 
     def reverse_list(self):
         """
@@ -186,7 +200,20 @@ if __name__ == '__main__':
     # # 查找单项列表，倒数第k个节点
     # print(hero_list.find_last_k_node(4))
 
-    # 反转单链表
+    # # 反转单链表
+    # hero_node1 = HeroNode(1, '宋江', '及时雨')
+    # hero_node2 = HeroNode(2, '卢俊义', '玉麒麟')
+    # hero_node3 = HeroNode(3, '吴用', '智多星')
+    # hero_list = SingleLinkedList()
+    # hero_list.add_by_order(hero_node1)
+    # hero_list.add_by_order(hero_node2)
+    # hero_list.add_by_order(hero_node3)
+    # hero_list.list()
+    # print()
+    # hero_list.reverse_list()
+    # hero_list.list()
+
+    # 利用栈，倒序输出
     hero_node1 = HeroNode(1, '宋江', '及时雨')
     hero_node2 = HeroNode(2, '卢俊义', '玉麒麟')
     hero_node3 = HeroNode(3, '吴用', '智多星')
@@ -194,7 +221,4 @@ if __name__ == '__main__':
     hero_list.add_by_order(hero_node1)
     hero_list.add_by_order(hero_node2)
     hero_list.add_by_order(hero_node3)
-    hero_list.list()
-    print()
-    hero_list.reverse_list()
-    hero_list.list()
+    hero_list.reverse_list_by_stack()
