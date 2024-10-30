@@ -72,6 +72,42 @@ class SingleLinkedList:
             temp = temp.next
         print("没有找到编号为 %d 的英雄" % no)
 
+    def length(self):
+        temp: HeroNode = self.head
+        count = 0
+        while temp.next:
+            count += 1
+            temp = temp.next
+        return count
+
+    def find_last_k_node(self, k: int):
+        # 先把链表从头到尾遍历，获取链表的长度
+        # 获取到链表的长度后，从头遍历到 (length - k) 个节点，就是倒数第k个节点
+        temp: HeroNode = self.head
+        if k <= 0 or k > self.length():
+            print(f"参数有误,当前链表长度为{self.length()}")
+            return None
+        for i in range(self.length() + 1 - k):
+            temp = temp.next
+        return temp
+
+    def reverse_list(self):
+        """
+        头插法，双指针
+        1. 定义一个临时头节点reverseHead，初始化为一个新的head
+        2. 从头到尾遍历原来的链表，没遍历一个节点，将其取出，并插入到链表的最前端
+        3. 原来的链表的头节点的next指向临时头节点reverseHead的next
+        :return:
+        """
+        temp: HeroNode = self.head
+        reverse_head: HeroNode = HeroNode(0, '', '')
+        while temp.next:
+            next_node: HeroNode = temp.next  # 双指针，临时变量保存当前节点
+            temp.next = next_node.next
+            next_node.next = reverse_head.next  # 插入到新的链表
+            reverse_head.next = next_node  # 插入到新的链表
+        self.head.next = reverse_head.next
+
 
 if __name__ == '__main__':
     # # 新节点直接追加到尾部
@@ -116,20 +152,49 @@ if __name__ == '__main__':
     # hero_list.update(HeroNode(6, '吴用1', '智多星1'))
     # hero_list.list()
 
-    # 删除
+    # # 删除
+    # hero_node1 = HeroNode(1, '宋江', '及时雨')
+    # hero_node2 = HeroNode(2, '卢俊义', '玉麒麟')
+    # hero_node3 = HeroNode(3, '吴用', '智多星')
+    # hero_node4 = HeroNode(4, '林冲', '豹子头')
+    # hero_list = SingleLinkedList()
+    # hero_list.add_by_order(hero_node1)
+    # hero_list.add_by_order(hero_node4)
+    # hero_list.add_by_order(hero_node2)
+    # hero_list.add_by_order(hero_node3)
+    # hero_list.list()
+    # print("====================删除后====================")
+    # hero_list.delete(3)
+    # hero_list.delete(1)
+    # hero_list.delete(2)
+    # hero_list.delete(4)
+    # hero_list.list()
+
+    # # 面试题，统计单向链表，统计有效节点数
+    # hero_node1 = HeroNode(1, '宋江', '及时雨')
+    # hero_node2 = HeroNode(2, '卢俊义', '玉麒麟')
+    # hero_node3 = HeroNode(3, '吴用', '智多星')
+    # hero_node4 = HeroNode(4, '林冲', '豹子头')
+    # hero_list = SingleLinkedList()
+    # hero_list.add_by_order(hero_node1)
+    # hero_list.add_by_order(hero_node4)
+    # hero_list.add_by_order(hero_node2)
+    # hero_list.add_by_order(hero_node3)
+    # hero_list.list()
+    # print(hero_list.length())
+    #
+    # # 查找单项列表，倒数第k个节点
+    # print(hero_list.find_last_k_node(4))
+
+    # 反转单链表
     hero_node1 = HeroNode(1, '宋江', '及时雨')
     hero_node2 = HeroNode(2, '卢俊义', '玉麒麟')
     hero_node3 = HeroNode(3, '吴用', '智多星')
-    hero_node4 = HeroNode(4, '林冲', '豹子头')
     hero_list = SingleLinkedList()
     hero_list.add_by_order(hero_node1)
-    hero_list.add_by_order(hero_node4)
     hero_list.add_by_order(hero_node2)
     hero_list.add_by_order(hero_node3)
     hero_list.list()
-    print("====================删除后====================")
-    hero_list.delete(3)
-    hero_list.delete(1)
-    hero_list.delete(2)
-    hero_list.delete(4)
+    print()
+    hero_list.reverse_list()
     hero_list.list()
