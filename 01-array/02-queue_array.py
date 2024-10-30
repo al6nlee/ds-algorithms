@@ -45,13 +45,23 @@ class ArrayQueue:
 
 if __name__ == '__main__':
     q = ArrayQueue(3)
-    q.add_que(1)
-    q.add_que(2)
-    q.add_que(3)
-    q.add_que(4)  # 队列已满
-    print(q.get_que())
-    # print(q.get_que())
-    # print(q.get_que())
-
-    print(q.show_que())
-    print(q.head_que())
+    while True:
+        print("================系统================")
+        print("a: add添加数据")
+        print("g: get取出数据")
+        print("s: show队列所有查看数据")
+        print("h: head查看头数据")
+        print("q: quit退出")
+        print("====================================")
+        option = input("请输入你的选择：")
+        if option == "a":
+            item = input("请输入要添加的数据：")
+            q.add_que(item)
+        elif option == "g":
+            print(q.get_que())
+        elif option == "s":
+            print(q.show_que())
+        elif option == "h":
+            print(q.head_que())
+        elif option == "q":
+            break
