@@ -46,6 +46,9 @@ class SingleLinkedList:
 
     def list(self):
         temp: HeroNode = self.head
+        if not temp.next:
+            print("链表为空")
+            return
         while temp.next:
             temp = temp.next
             print(temp)
@@ -126,4 +129,7 @@ if __name__ == '__main__':
     hero_list.list()
     print("====================删除后====================")
     hero_list.delete(3)
+    hero_list.delete(1)
+    hero_list.delete(2)
+    hero_list.delete(4)
     hero_list.list()
