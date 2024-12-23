@@ -82,15 +82,17 @@ if __name__ == '__main__':
     hero_2 = HeroNode(2, '吴用')
     hero_3 = HeroNode(3, '卢俊义')
     hero_4 = HeroNode(4, '林冲')
+    hero_5 = HeroNode(5, '宗盛')
 
     # 手动创建二叉数，后面递归创建二叉树
     binary_tree = BinaryTree(hero_1)
     binary_tree.root.left = hero_2
     binary_tree.root.right = hero_3
+    binary_tree.root.right.left = hero_5
     binary_tree.root.right.right = hero_4
 
-    binary_tree.pre_order()  # 1 -> 2 -> 3 -> 4
+    binary_tree.pre_order()  # 1 -> 2 -> 3 -> 5 -> 4
     print()
-    binary_tree.in_order()  # 2 -> 1 -> 3 -> 4
+    binary_tree.in_order()  # 2 -> 1 -> 5 -> 3 -> 4
     print()
-    binary_tree.post_order()  # 2 -> 4 -> 3 -> 1
+    binary_tree.post_order()  # 2 -> 5 -> 4 -> 3 -> 1
